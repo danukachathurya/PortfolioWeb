@@ -655,12 +655,17 @@ function CertificatesSection() {
               key={certificate.n}
               className="rounded-2xl border border-border bg-card overflow-hidden group"
             >
-              <div className="aspect-[4/3] bg-gradient-hero relative grid place-items-center">
-                <Award className="w-20 h-20 text-primary-foreground/40" />
+              <div className="aspect-[4/3] relative overflow-hidden bg-muted">
+                <img
+                  src={certificate.image}
+                  alt={`${certificate.title} certificate`}
+                  className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                  loading="lazy"
+                />
                 <div className="absolute top-3 left-3 px-2 py-1 rounded-md bg-background/80 backdrop-blur text-[10px] uppercase tracking-wider">
-                  Preview
+                  Certificate
                 </div>
-                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 grid place-items-center transition">
+                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 grid place-items-center transition">
                   <ExternalLink className="w-6 h-6 opacity-0 group-hover:opacity-100 transition" />
                 </div>
               </div>

@@ -250,14 +250,22 @@ export const certificates = [
     title: "AWS Certified Solutions Architect SAA-C03: 30-Day Bootcamp",
     issuer: "Udemy",
     date: "Dec 2024",
+    image: "https://i.imgur.com/9KCa4XV.png",
   },
   {
     n: "02",
     title: "Linux Zero To Hero: 5 Hours Course Best for Beginners",
     issuer: "Udemy",
     date: "Jan 2025",
+    image: "https://i.imgur.com/35OUN0d.png",
   },
-  { n: "03", title: "Learn Docker and DevOps and Containerize", issuer: "Udemy", date: "Jan 2025" },
+  {
+    n: "03",
+    title: "Learn Docker and DevOps and Containerize",
+    issuer: "Udemy",
+    date: "Jan 2025",
+    image: "https://i.imgur.com/HaA7vqb.png",
+  },
 ];
 
 export const reflectionHighlights = [
