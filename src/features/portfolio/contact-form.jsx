@@ -1,4 +1,5 @@
 import { startTransition } from "react";
+import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,13 +10,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { profile } from "./content";
-import { buildContactMailBody, buildMailTo } from "./utils";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Please enter your name."),
   email: z.string().trim().email("Please enter a valid email address."),
   message: z.string().trim().min(20, "Please add a little more detail so the message is useful."),
 });
+
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+function isEmailJsConfigured() {
+  return Boolean(EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY);
+}
 
 export function ContactForm() {
   const {
@@ -32,15 +40,37 @@ export function ContactForm() {
     },
   });
 
-  const onSubmit = handleSubmit((values) => {
-    const href = buildMailTo({
-      subject: `Portfolio inquiry from ${values.name}`,
-      body: buildContactMailBody(values),
-    });
+  const onSubmit = handleSubmit(async (values) => {
+    if (!isEmailJsConfigured()) {
+      toast.error("Email sending is not configured yet. Add your EmailJS keys to enable it.");
+      return;
+    }
 
-    window.location.assign(href);
-    toast.success("Opening your email client with a prefilled draft.");
-    startTransition(() => reset());
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: values.name,
+          reply_to: values.email,
+          from_email: values.email,
+          message: values.message,
+          to_name: profile.fullName,
+        },
+        {
+          publicKey: EMAILJS_PUBLIC_KEY,
+          limitRate: {
+            throttle: 1000,
+          },
+        },
+      );
+
+      toast.success("Message sent successfully.");
+      startTransition(() => reset());
+    } catch (error) {
+      console.error(error);
+      toast.error("Message sending failed. Please check your EmailJS setup and try again.");
+    }
   });
 
   return (
@@ -51,10 +81,7 @@ export function ContactForm() {
       <div>
         <h3 className="text-xl font-bold">Contact Form</h3>
         <p className="text-sm text-muted-foreground mt-1">
-          Send a polished message with validation and a prefilled email draft.
-        </p>
-        <p className="text-xs text-muted-foreground mt-2">
-          Submitting opens your default email client and drafts the message to {profile.email}.
+          Have a project idea, internship opportunity, or collaboration in mind? Feel free to send me a message. I’m always open to discussing web development projects, software solutions, and new opportunities.
         </p>
       </div>
 
