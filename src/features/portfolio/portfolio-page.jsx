@@ -11,7 +11,9 @@ import {
   Download,
   ChevronDown,
   ExternalLink,
+  Github,
   GraduationCap,
+  Linkedin,
   Mail,
   MapPin,
   Menu,
@@ -257,15 +259,15 @@ function HeroSection() {
 
           <div className="flex flex-wrap gap-3 pt-2">
             <Button variant="outline" size="sm" asChild>
-              <a href={`mailto:${profile.email}`}>
-                <Mail className="w-4 h-4" />
-                Email
+              <a href={profile.githubUrl} target="_blank" rel="noreferrer">
+                <Github className="w-4 h-4" />
+                GitHub
               </a>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href={profile.phoneHref}>
-                <Phone className="w-4 h-4" />
-                Call
+              <a href={profile.linkedinUrl} target="_blank" rel="noreferrer">
+                <Linkedin className="w-4 h-4" />
+                LinkedIn
               </a>
             </Button>
           </div>
@@ -867,21 +869,6 @@ function ContactSection() {
                 Email is the best option for detailed project discussions and opportunity inquiries.
               </p>
             </div>
-
-            <div className="flex gap-3">
-              <Button variant="hero" className="flex-1" asChild>
-                <a href={`mailto:${profile.email}`}>
-                  <Mail className="w-4 h-4" />
-                  Email Me
-                </a>
-              </Button>
-              <Button variant="outline" className="flex-1" asChild>
-                <a href={profile.phoneHref}>
-                  <Phone className="w-4 h-4" />
-                  Call Me
-                </a>
-              </Button>
-            </div>
           </div>
 
           <ContactForm />
@@ -972,8 +959,7 @@ function SiteFooter() {
 
         <div className="border-t border-border pt-6 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
           <div>
-            &copy; 2026 {profile.fullName}. Built with React, Vite, Tailwind CSS, and TanStack
-            Start.
+            &copy; 2026 {profile.fullName}. All rights reserved.
           </div>
           <button
             onClick={() => scrollToSection("home")}

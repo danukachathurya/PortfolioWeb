@@ -81,7 +81,9 @@ export function ContactForm() {
       <div>
         <h3 className="text-xl font-bold">Contact Form</h3>
         <p className="text-sm text-muted-foreground mt-1">
-          Have a project idea, internship opportunity, or collaboration in mind? Feel free to send me a message. I’m always open to discussing web development projects, software solutions, and new opportunities.
+          Have a project idea, internship opportunity, or collaboration in mind? Feel free to send
+          me a message. I'm always open to discussing web development projects, software solutions,
+          and new opportunities.
         </p>
       </div>
 

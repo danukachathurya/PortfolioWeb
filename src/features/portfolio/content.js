@@ -23,6 +23,8 @@ export const profile = {
   coreStrength: "Frontend to backend delivery",
   university: "SLIIT University",
   company: "Gamage Recruiters",
+  githubUrl: "https://github.com/danukachathurya",
+  linkedinUrl: "https://www.linkedin.com/in/danukachathurya/",
 };
 
 export const navItems = [
