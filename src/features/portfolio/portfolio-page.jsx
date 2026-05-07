@@ -901,20 +901,6 @@ function SiteFooter() {
               If you are reviewing opportunities, collaborations, or project work, the quickest way
               to reach me is through email or phone.
             </p>
-            <div className="flex gap-2">
-              <Button size="sm" variant="hero" asChild>
-                <a href={`mailto:${profile.email}`}>
-                  <Mail className="w-4 h-4" />
-                  Email Me
-                </a>
-              </Button>
-              <Button size="sm" variant="outline" asChild>
-                <a href={profile.phoneHref}>
-                  <Phone className="w-4 h-4" />
-                  Call
-                </a>
-              </Button>
-            </div>
           </div>
 
           <div>
@@ -950,7 +936,14 @@ function SiteFooter() {
               </div>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {footerHighlights.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item.id}>
+                    <button
+                      onClick={() => scrollToSection(item.id)}
+                      className="text-muted-foreground hover:text-primary"
+                    >
+                      {item.label}
+                    </button>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -958,9 +951,7 @@ function SiteFooter() {
         </div>
 
         <div className="border-t border-border pt-6 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
-          <div>
-            &copy; 2026 {profile.fullName}. All rights reserved.
-          </div>
+          <div>&copy; 2026 {profile.fullName}. All rights reserved.</div>
           <button
             onClick={() => scrollToSection("home")}
             className="flex items-center gap-2 hover:text-primary"

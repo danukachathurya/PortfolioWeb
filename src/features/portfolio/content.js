@@ -357,8 +357,8 @@ export const contactMethods = [
 ];
 
 export const footerHighlights = [
-  "Education",
-  "University Projects",
-  "Personal Projects",
-  "Certificates",
+  { id: "education", label: "Education" },
+  { id: "university-projects", label: "University Projects" },
+  { id: "personal-projects", label: "Personal Projects" },
+  { id: "certificates", label: "Certificates" },
 ];
