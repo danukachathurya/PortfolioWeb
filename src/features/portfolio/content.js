@@ -31,6 +31,11 @@ export const navItems = [
   { id: "education", label: "Education" },
   { id: "experience", label: "Experience" },
   { id: "skills", label: "Skills" },
+  { id: "university-projects", label: "University Projects" },
+  { id: "personal-projects", label: "Personal Projects" },
+  { id: "certificates", label: "Certificates" },
+  { id: "reflective-journal", label: "Reflective Journal" },
+  { id: "career-development-plan", label: "Career Development Plan" },
   { id: "contact", label: "Contact" },
 ];
 

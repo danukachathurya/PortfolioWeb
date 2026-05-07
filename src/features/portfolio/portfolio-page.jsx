@@ -9,6 +9,7 @@ import {
   Code2,
   Database,
   Download,
+  ChevronDown,
   ExternalLink,
   GraduationCap,
   Mail,
@@ -24,6 +25,12 @@ import {
 import portrait from "@/assets/portrait.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Progress } from "@/components/ui/progress";
 import { Toaster } from "@/components/ui/sonner";
 import { ContactForm } from "./contact-form";
@@ -69,9 +76,13 @@ const contactIconMap = {
   phone: Phone,
 };
 
+const primaryNavIds = ["home", "about", "education", "experience", "skills", "contact"];
+
 function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const primaryNavItems = navItems.filter((item) => primaryNavIds.includes(item.id));
+  const secondaryNavItems = navItems.filter((item) => !primaryNavIds.includes(item.id));
 
   const syncScrollState = useEffectEvent(() => {
     setScrolled(window.scrollY > 20);
@@ -90,10 +101,10 @@ function SiteHeader() {
         scrolled ? "bg-background/80 backdrop-blur-xl border-b border-border" : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center gap-4">
         <button
           onClick={() => scrollToSection("home")}
-          className="flex items-center gap-2 font-bold"
+          className="flex shrink-0 items-center gap-2 font-bold"
         >
           <span className="w-9 h-9 rounded-lg bg-gradient-hero text-primary-foreground grid place-items-center text-sm shadow-glow">
             {profile.initials}
@@ -101,19 +112,40 @@ function SiteHeader() {
           <span className="hidden sm:inline">{profile.shortName}</span>
         </button>
 
-        <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition rounded-md hover:bg-secondary"
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
+        <div className="hidden min-w-0 flex-1 items-center justify-center gap-1 lg:flex">
+          <nav className="flex items-center gap-1" aria-label="Primary">
+            {primaryNavItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition hover:bg-secondary hover:text-foreground"
+              >
+                {item.label}
+              </button>
+            ))}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition hover:bg-secondary hover:text-foreground">
+                  More
+                  <ChevronDown className="h-4 w-4" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="center" className="w-56">
+                {secondaryNavItems.map((item) => (
+                  <DropdownMenuItem
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="cursor-pointer"
+                  >
+                    {item.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </nav>
+        </div>
 
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden shrink-0 md:flex items-center gap-2">
           <Button size="sm" variant="hero" asChild>
             <a href={buildResumeRequestHref()}>
               <Download className="w-4 h-4" />
@@ -530,7 +562,7 @@ function SkillsSection() {
 
 function ProjectsSection() {
   return (
-    <section className="py-24">
+    <section id="university-projects" className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="University Projects"
@@ -563,42 +595,44 @@ function ProjectsSection() {
           ))}
         </div>
 
-        <SectionHeader
-          eyebrow="Personal Projects"
-          title="Featured personal builds with polished presentation and product-focused UI"
-          lead="These cards highlight personal full-stack and frontend projects, each presented with its core stack and short context."
-        />
+        <div id="personal-projects">
+          <SectionHeader
+            eyebrow="Personal Projects"
+            title="Featured personal builds with polished presentation and product-focused UI"
+            lead="These cards highlight personal full-stack and frontend projects, each presented with its core stack and short context."
+          />
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {personalProjects.map((project) => (
-            <div
-              key={project.abbr}
-              className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition"
-            >
-              <div className="flex items-start gap-4 mb-4">
-                <div className="w-14 h-14 rounded-xl bg-gradient-hero grid place-items-center font-bold text-primary-foreground shadow-glow shrink-0">
-                  {project.abbr}
+          <div className="grid md:grid-cols-2 gap-6">
+            {personalProjects.map((project) => (
+              <div
+                key={project.abbr}
+                className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition"
+              >
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-hero grid place-items-center font-bold text-primary-foreground shadow-glow shrink-0">
+                    {project.abbr}
+                  </div>
+                  <div className="flex-1">
+                    <Badge
+                      variant="outline"
+                      className="border-primary/40 text-primary text-[10px] mb-2"
+                    >
+                      Featured Build
+                    </Badge>
+                    <h3 className="text-xl font-bold">{project.title}</h3>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <Badge
-                    variant="outline"
-                    className="border-primary/40 text-primary text-[10px] mb-2"
-                  >
-                    Featured Build
-                  </Badge>
-                  <h3 className="text-xl font-bold">{project.title}</h3>
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {project.stack.map((item) => (
+                    <Badge key={item} variant="secondary" className="text-[10px]">
+                      {item}
+                    </Badge>
+                  ))}
                 </div>
+                <p className="text-sm text-muted-foreground">{project.desc}</p>
               </div>
-              <div className="flex flex-wrap gap-1.5 mb-3">
-                {project.stack.map((item) => (
-                  <Badge key={item} variant="secondary" className="text-[10px]">
-                    {item}
-                  </Badge>
-                ))}
-              </div>
-              <p className="text-sm text-muted-foreground">{project.desc}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -607,7 +641,7 @@ function ProjectsSection() {
 
 function CertificatesSection() {
   return (
-    <section className="py-24 bg-gradient-surface">
+    <section id="certificates" className="py-24 bg-gradient-surface">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="Certificates"
@@ -656,7 +690,7 @@ function CertificatesSection() {
 
 function ReflectiveSection() {
   return (
-    <section className="py-24">
+    <section id="reflective-journal" className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="Reflective Journal"
@@ -706,7 +740,7 @@ function ReflectiveSection() {
 
 function CareerSection() {
   return (
-    <section className="py-24 bg-gradient-surface">
+    <section id="career-development-plan" className="py-24 bg-gradient-surface">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="Career Development Plan"
