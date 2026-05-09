@@ -321,8 +321,8 @@ function AboutSection() {
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="About"
-          title="A one-page portfolio that tells a clear story about your engineering direction"
-          lead="This section combines academic foundation, internship experience, and full stack interests in a layout that is easy to scan for recruiters and collaborators."
+          title="A portfolio that reflects my growth as a full stack developer"
+          lead="This section highlights my academic background, internship experience, and growing interest in full stack development in a way that is clear and easy for recruiters and collaborators to scan."
         />
 
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-8">
