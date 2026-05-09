@@ -383,8 +383,8 @@ function EducationSection() {
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="Education"
-          title="An academic timeline that reflects both foundation and progression"
-          lead="This timeline highlights the key stages in your education, from school-level science studies to your current degree path in Information Technology."
+          title="My academic journey in Information Technology"
+          lead="This section outlines the key stages of my education, from my school background in science to my current undergraduate studies in Information Technology."
         />
 
         <div className="relative pl-8 space-y-8 border-l-2 border-border">
@@ -647,8 +647,8 @@ function CertificatesSection() {
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="Certificates"
-          title="Verified learning, presented in a clean gallery with quick preview access"
-          lead="Use this section to showcase the credentials that support your portfolio story. Each card keeps the certificate title, issuer, and date easy to scan."
+          title="Certificates that support my learning journey"
+          lead="This section presents the certifications I have completed, with each one showing the title, issuer, and date in a clear and easy-to-scan format."
         />
 
         <div className="grid md:grid-cols-3 gap-6">
