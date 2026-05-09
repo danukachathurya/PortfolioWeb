@@ -24,7 +24,6 @@ import {
   Wrench,
   X,
 } from "lucide-react";
-import portrait from "@/assets/portrait.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -79,6 +78,7 @@ const contactIconMap = {
 };
 
 const primaryNavIds = ["home", "about", "education", "experience", "skills", "contact"];
+const heroProfileImage = "https://i.imgur.com/P1tgG9G.png";
 
 function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -277,7 +277,7 @@ function HeroSection() {
           <div className="absolute -inset-4 bg-gradient-hero opacity-20 blur-3xl rounded-full" />
           <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-border shadow-elegant bg-card">
             <img
-              src={portrait}
+              src={heroProfileImage}
               alt={`Portrait of ${profile.fullName}`}
               width={896}
               height={1152}
