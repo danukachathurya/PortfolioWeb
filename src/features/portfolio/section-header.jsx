@@ -1,6 +1,6 @@
 export function SectionHeader({ eyebrow, title, lead }) {
   return (
-    <div className="max-w-3xl mb-14">
+    <div className="w-full mb-14">
       <div className="text-xs uppercase tracking-[0.25em] text-primary font-semibold mb-3">
         {eyebrow}
       </div>
